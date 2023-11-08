@@ -27,7 +27,7 @@ def abbr_file_name(input_file_name):
 def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for_EnExP, \
               hsv_min_tuple, hsv_max_tuple):
     bool_exit_program=False
-    area_num = 1
+    area_idx = 0
     number_of_recorded_frame = 1
     extra_time_start = 0 # Info in [needle_en_time - extra_time_start, needle_ex_time + extra_time_end] are shown
     extra_time_end = 0
@@ -45,8 +45,9 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
     np_en_time, np_ex_time, np_area_num = read_EnEx_info(path_for_EnExP)
     
     # Read data for Area 1
-    ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_num-1], extra_time_start)
-    ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_num-1], extra_time_end)
+    area_num=np_area_num[area_idx]
+    ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_idx], extra_time_start)
+    ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_idx], extra_time_end)
     #start_idx = find_first_time_stamp_idx(df_IMU,ex_cam_start_time)
     #end_idx = find_last_time_stamp_idx(df_IMU,ex_cam_end_time)
     #np_time_for_plot, np_roll, np_pitch, np_yaw = read_eluer_angle(df_IMU, location, start_idx, end_idx)
@@ -168,18 +169,19 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
             
         # After processing a single area, update info
         if target_time >= ex_cam_end_time:
-           area_num+=1
+           area_idx+=1
            
-           if area_num>12:
+           if area_idx>=12:
                print('Finish 12 areas.')
                break
            
-           if area_num==(np_en_time.shape[0] + 1):
+           if area_idx==np_en_time.shape[0]:
                print('The detection result does not include all 12 areas.')
                break
            
-           ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_num-1], extra_time_start)
-           ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_num-1], extra_time_end)
+           area_num=np_area_num[area_idx]
+           ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_idx], extra_time_start)
+           ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_idx], extra_time_end)
            #start_idx = find_first_time_stamp_idx(df_IMU,ex_cam_start_time)
            #end_idx = find_last_time_stamp_idx(df_IMU,ex_cam_end_time)
            #np_time_for_plot, np_roll, np_pitch, np_yaw = read_eluer_angle(df_IMU, location, start_idx, end_idx) 
@@ -225,13 +227,13 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
 if __name__=='__main__':
     BOOL_PROCESS_CSV_W_HSV=True 
     exit_program=False
-    data_dir='F:/experts/SAVS 2022 (Jan 18 to Jan 22)/23 Subjects from SAVS 2022/'
-    post_process_data_dir='F:/experts/post-process results(2023-1-12)/SAVS(2022)/'
-    root_output_dir='D:/test_videos/videos_with_bbox(SAVS_2022)/' # videos_with_bbox_one_per_person
+    data_dir='D:/experts/SAVS 2022 (Jan 18 to Jan 22)/23 Subjects from SAVS 2022/'
+    post_process_data_dir='D:/experts/post-process results(2023-1-12)/SAVS(2022)/'
+    root_output_dir='E:/Jianxin/test_videos/temp/' # videos_with_bbox_one_per_person
             
     # For checking a csv file that contains both video id and the corresponding HSV value
     if BOOL_PROCESS_CSV_W_HSV:
-        subject_name_dir='D:/test_videos/portion.csv'
+        subject_name_dir='E:/Jianxin/test_videos/portion.csv'
         
         # Read subject id
         df_name=pd.read_csv(subject_name_dir, sep='\s*,\s*', usecols=['Subject_id', 'min(HSV)', 'max(HSV)'], engine='python')
