@@ -12,5 +12,6 @@ For a surgical suturing simulator aiming for the clock-face model in FVS, Shayan
 
 
 # Demo
-https://github.com/axin233/hand_roll_estimation/assets/59490151/a5e2b88a-0d58-43e9-a641-7c2dd1df8b93
+
+https://github.com/axin233/hand_roll_estimation/assets/59490151/aec49e59-d6ba-482a-b07e-ca935f480208
 
