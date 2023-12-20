@@ -14,7 +14,7 @@ For a surgical suturing simulator aiming for the clock-face model in FVS, Shayan
 ## Demo
 This demo is the output of the 3 algorithms when processing a graduate student's video. This participant has zero experience in suturing. The demo includes two portions:
 - The left portion is a video with hand motion. Its corresponding frame number is denoted by the magenta vertical line in the right figure, and its corresponding IMU angle and estimated angles are shown in the title of the right figure.
-- The right figure shows IMU angles and estimated angles from the 3 algorithms.
+- The right figure shows IMU angles and estimated angles from the 3 algorithms. Its legend includes the mean square error (MAE) for the 3 algorithms per suture. 
 
 https://github.com/axin233/hand_roll_estimation/assets/59490151/0c84766d-c1a0-482e-a4a7-b8eb7deb8044
 
