@@ -12,13 +12,13 @@ For a surgical suturing simulator aiming for the clock-face model in FVS, Shayan
 
 
 ## Demo
-This video compares the IMU measurements and the estimations from the 3 algorithms. Specifically,
+This demo is the output of the 3 algorithms when processing a graduate student's video. This participant has zero experience in suturing. The demo includes two portions:
 - The left portion is a video with hand motion. Its corresponding frame number is denoted by the magenta vertical line in the right figure, and its corresponding IMU angle and estimated angles are shown in the title of the right figure.
 - The right figure shows IMU angles and estimated angles from the 3 algorithms.
 
-https://github.com/axin233/hand_roll_estimation/assets/59490151/aec49e59-d6ba-482a-b07e-ca935f480208
+https://github.com/axin233/hand_roll_estimation/assets/59490151/0c84766d-c1a0-482e-a4a7-b8eb7deb8044
 
-Notice that the estimated angles have similar patterns as the IMU angles, indicating the 3 algorithms can estimate hand roll angles based on the input video.
+As shown in the demo, the estimated angles have similar patterns as the IMU angles, indicating the 3 algorithms can estimate hand roll angles based on the input video. Also, notice that CNN estimated angles have a large spike at Suture 7, but the spike disappear at MO and MM. One of the reasons is that hand motion rarely occurs in the training dataset, and CNN is sensitive to unseen hand motion.
 
 ## Performance evaluation
 
