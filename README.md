@@ -37,6 +37,8 @@ To examine the algorithms' robustness, videos collected at 4 locations are used.
 
 ![location_img_1](https://github.com/axin233/hand_roll_estimation/assets/59490151/7be46c6a-8521-43f0-a2fc-6283e100c16f)
 
+> Fig. 2 Example video frames from the 4 data collection locations
+
 This table summarizes the roll angle estimation error (unit: degrees) for the 3 algorithms at the 4 locations.
 
 |          | CNN | MO | MM |
@@ -64,18 +66,27 @@ This table shows the inference speed of the 3 algorithms on an H100 GPU.
 ![dataset_code](https://github.com/axin233/hand_roll_estimation/assets/59490151/795213f7-1eee-49f2-8545-b6f58d5d4450)
 -->
 
+### Generating the custom deep-learning dataset
+
+Fig. 3 demonstrates the process of generating the deep-learning dataset. A detailed explanation of the process can be found in our paper.
+
 <p align="center">
   <img width="600" height="200" src="https://github.com/axin233/hand_roll_estimation/assets/59490151/795213f7-1eee-49f2-8545-b6f58d5d4450">
 </p>
+
+> Fig. 3 The process for generating the custom deep-learning dataset
 
 <!--
 ![network](https://github.com/axin233/hand_roll_estimation/assets/59490151/0ff6bb9a-a3ff-4265-add1-736cd2ac9750)
 -->
 
+Fig. 4 shows the structures of CNN, MO, and MM. A detailed description of the process can be found in our paper.
+
 <p align="center">
-  <img width="690" height="200" src="https://github.com/axin233/hand_roll_estimation/assets/59490151/0ff6bb9a-a3ff-4265-add1-736cd2ac9750">
+  <img width="863" height="250" src="https://github.com/axin233/hand_roll_estimation/assets/59490151/0ff6bb9a-a3ff-4265-add1-736cd2ac9750">
 </p>
 
+> Fig. 4 The structure of (a) CNN and (b) MO and MM. Notice that MO and MM have the same structure, as MM uses identical output branches at each time step.
 
 <!--
 |          | CNN (surface) | MO (surface) | MM (surface) | CNN (depth) | MO (depth) | MM (depth) |
