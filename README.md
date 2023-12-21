@@ -82,6 +82,8 @@ Fig. 3 demonstrates the process of generating the deep-learning dataset. A detai
 ![network](https://github.com/axin233/hand_roll_estimation/assets/59490151/0ff6bb9a-a3ff-4265-add1-736cd2ac9750)
 -->
 
+### Network structures
+
 Fig. 4 shows the structures of CNN, MO, and MM. A detailed description of the structures can be found in our paper.
 
 <p align="center">
@@ -89,6 +91,10 @@ Fig. 4 shows the structures of CNN, MO, and MM. A detailed description of the st
 </p>
 
 > Fig. 4 The structure of (a) CNN and (b) MO and MM. Notice that MO and MM have the same structure, as MM uses identical output branches at each time step.
+
+## Reproducing the results
+
+To reproduce the results in the demo, please download the [data](https://drive.google.com/drive/folders/1SZlVx9E_UTGEork87cag5zlajOH2bFDY?usp=sharing) and the [algorithms' weights](https://drive.google.com/drive/folders/1GKsiPBIkfuXwhrxvSPqSASQpL3ghfv8j?usp=sharing). The code is located at `<algorithm_name>/sliding_window/test_video.py`.
 
 <!--
 |          | CNN (surface) | MO (surface) | MM (surface) | CNN (depth) | MO (depth) | MM (depth) |
