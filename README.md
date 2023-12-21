@@ -94,7 +94,17 @@ Fig. 4 shows the structures of CNN, MO, and MM. A detailed description of the st
 
 ## Reproducing the results
 
-To reproduce the results in the demo, please download the [data](https://drive.google.com/drive/folders/1SZlVx9E_UTGEork87cag5zlajOH2bFDY?usp=sharing) and the [algorithms' weights](https://drive.google.com/drive/folders/1GKsiPBIkfuXwhrxvSPqSASQpL3ghfv8j?usp=sharing). The code is located at `<algorithm_name>/sliding_window/test_video.py`.
+To reproduce the results in the demo, please download the [data](https://drive.google.com/drive/folders/1SZlVx9E_UTGEork87cag5zlajOH2bFDY?usp=sharing) and the [algorithms' weights](https://drive.google.com/drive/folders/1GKsiPBIkfuXwhrxvSPqSASQpL3ghfv8j?usp=sharing). The code is located at `<algorithm_name>/sliding_window/test_video.py`. If you have any questions, please feel free to email me at jianxig@g.clemson.edu :smile:
+
+## System requirements
+
+The code is written in Python. It requires the following packages.
+
+- Pytorch 1.10.0
+- torchvision 0.11.0
+- Pandas 1.4.3
+- Numpy 1.23.5
+- tqdm 4.64.1
 
 <!--
 |          | CNN (surface) | MO (surface) | MM (surface) | CNN (depth) | MO (depth) | MM (depth) |
