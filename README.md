@@ -28,7 +28,7 @@ To examine the algorithms' robustness, videos collected at 4 locations are used.
 
 ![location_img_1](https://github.com/axin233/hand_roll_estimation/assets/59490151/7be46c6a-8521-43f0-a2fc-6283e100c16f)
 
-This table summarizes the roll angle estimation error for the 3 algorithms at the 4 locations.
+This table summarizes the roll angle estimation error (unit: degrees) for the 3 algorithms at the 4 locations.
 
 |          | CNN | MO | MM |
 | :------: | :------: | :------: | :------: |
