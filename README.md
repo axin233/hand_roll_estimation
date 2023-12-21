@@ -25,3 +25,25 @@ As shown in the demo, the estimated angles have similar patterns as the IMU angl
 ### Robustness
 
 To examine the algorithms' robustness, videos collected at 4 locations are used. Notice that the 4 locations have different backgrounds and different camera orientations. 
+
+![location_img_1](https://github.com/axin233/hand_roll_estimation/assets/59490151/7be46c6a-8521-43f0-a2fc-6283e100c16f)
+
+This table summarizes the roll angle estimation error for the 3 algorithms at the 4 locations.
+
+|          | CNN | MO | MM |
+| :------: | :------: | :------: | :------: |
+| Location A | 10.25 | 9.6 | 8.77 |
+| Location B | 9.52 | 9.45 | 9.08 |
+| Location C | 7.27 | 7.47 | 7.37 |
+| Location D | 8.39 | 8.46 | 9.03 |
+
+> Note that these are the averaged errors at surface and depth conditions. 
+
+<!--
+|          | CNN (surface) | MO (surface) | MM (surface) | CNN (depth) | MO (depth) | MM (depth) |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| Location A | 9.79 | 9.08 | 8.42 | 10.71 | 10.11 | 9.12 |
+| Location B | 7.04 | 7.4 | 6.99 | 12.07 | 11.54 | 11.21 |
+| Location C | 6.35 | 6.45 | 6.26 | 8.21 | 8.52 | 8.52 |
+| Location D | 6.73 | 6.42 | 6.95 | 10.79 | 11.4 | 12.05 |
+-->
