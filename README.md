@@ -2,9 +2,12 @@
 
 ## Introduction
 For a surgical suturing simulator designed for the FVS clock-face model (see Fig. 1(a)), Shayan et al. [^Mehdi_paper] show that participants' skill levels can be identified by their hand rotation at the roll axis (see Fig. 1(d)). The approach, however, requires participants to wear IMUs (see Fig. 1(d)), which might interfere with their suturing performance. Thus, this repository proposes 3 deep-learning computer vision algorithms for contact-free hand roll angle estimation.
-- CNN: A convolutional neural network that receives a single image and then estimates the corresponding hand roll angle.
+- CNN: A convolutional neural network that receives a single image and then estimates the corresponding hand roll angle [^CNN_paper].
 - Many-to-one (MO): A convolutional recurrent neural network that receives a sequence of images and then estimates the hand roll angle for the last image (i.e., many images -> one estimation).
 - Many-to-many (MM): A convolutional recurrent neural network that receives a sequence of images and then estimates the hand roll angle for each image (i.e., many images -> many estimations).
+
+[^CNN_paper]:
+    Jianxin Gao, Shayan, Amir Mehdi, Simar Singh, Ravikiran Singapogu and Richard E. Groff. "Deep-learning computer vision algorithm for hand roll angle estimation and motion-based surgical suturing skill assessment" (Unpublished)
 
 <!--
 ![simulator_v1](https://github.com/axin233/hand_roll_estimation/assets/59490151/4eac4c05-d48b-4527-999a-c96100a86ed6)
