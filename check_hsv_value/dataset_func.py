@@ -274,16 +274,6 @@ def generate_data_set(np_depth_img_1, np_rgb_img, depth_scale, output_dataset_di
     upper_bound=hsv_max_tuple
     glove_mask_temp=cv2.inRange(np_hsv_img,lower_bound,upper_bound)
     
-# =============================================================================
-#     # test (For Subject_13860513672029808805-3-21-22-16-52-sur-sh)
-#     if rgb_frame_num_from_bag>=2619 and rgb_frame_num_from_bag<=2630:
-#         up_mask=np.ones((100, 848)).astype('uint8')
-#         down_mask=np.zeros((380, 848)).astype('uint8')
-#         mask=np.concatenate((up_mask*255, down_mask), axis=0)
-#         glove_mask_temp=cv2.subtract(glove_mask_temp, mask)
-#         cv2.imshow('glove_mask_temp', glove_mask_temp)
-# =============================================================================
-    
     glove_mask_filled, boundRect = glove_detection(glove_mask_temp)
     
     # (Data set 0) Record info

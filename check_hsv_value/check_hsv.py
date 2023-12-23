@@ -31,7 +31,6 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
     number_of_recorded_frame = 1
     extra_time_start = 0 # Info in [needle_en_time - extra_time_start, needle_ex_time + extra_time_end] are shown
     extra_time_end = 0
-    #location='Hand'
     path_for_avi_output=output_dir+'bbox_video.avi'
     path_for_bbox_csv=output_dir+'bbox.csv'
     
@@ -41,27 +40,12 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
     
     # Read data from csv files
     np_rgb_frameNum, external_cam_time = read_external_cam_data(path_for_external_cam_csv)
-    #df_IMU= read_IMU_data(path_for_IMU_csv)
     np_en_time, np_ex_time, np_area_num = read_EnEx_info(path_for_EnExP)
     
     # Read data for Area 1
     area_num=np_area_num[area_idx]
     ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_idx], extra_time_start)
     ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_idx], extra_time_end)
-    #start_idx = find_first_time_stamp_idx(df_IMU,ex_cam_start_time)
-    #end_idx = find_last_time_stamp_idx(df_IMU,ex_cam_end_time)
-    #np_time_for_plot, np_roll, np_pitch, np_yaw = read_eluer_angle(df_IMU, location, start_idx, end_idx)
-    #IMU_data_idx=[i for i in range(0,np_roll.shape[0])]
-    
-# =============================================================================
-#     # Unwrap data (i.e., Make the adjacent differences are never greater than pi)
-#     np_roll_radian = np.unwrap((np_roll*np.pi/180))
-#     np_roll = np_roll_radian * 180/np.pi
-#     np_pitch_radian = np.unwrap((np_pitch*np.pi/180))
-#     np_pitch = np_pitch_radian * 180/np.pi
-#     np_yaw_radian = np.unwrap((np_yaw*np.pi/180))
-#     np_yaw = np_yaw_radian * 180/np.pi
-# =============================================================================
     
     # Define the codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc('D', 'I', 'V', 'X')
@@ -182,20 +166,6 @@ def check_HSV(path_for_bag_file, output_dir, path_for_external_cam_csv, path_for
            area_num=np_area_num[area_idx]
            ex_cam_start_time = time_for_first_frame(external_cam_time, np_en_time[area_idx], extra_time_start)
            ex_cam_end_time = time_for_last_frame(external_cam_time, np_ex_time[area_idx], extra_time_end)
-           #start_idx = find_first_time_stamp_idx(df_IMU,ex_cam_start_time)
-           #end_idx = find_last_time_stamp_idx(df_IMU,ex_cam_end_time)
-           #np_time_for_plot, np_roll, np_pitch, np_yaw = read_eluer_angle(df_IMU, location, start_idx, end_idx) 
-           #IMU_data_idx=[i for i in range(0,np_roll.shape[0])]
-           
-# =============================================================================
-#            # Unwrap data (i.e., Make the adjacent differences are never greater than pi)
-#            np_roll_radian = np.unwrap((np_roll*np.pi/180))
-#            np_roll = np_roll_radian * 180/np.pi
-#            np_pitch_radian = np.unwrap((np_pitch*np.pi/180))
-#            np_pitch = np_pitch_radian * 180/np.pi
-#            np_yaw_radian = np.unwrap((np_yaw*np.pi/180))
-#            np_yaw = np_yaw_radian * 180/np.pi
-# =============================================================================
         
         # if pressed escape exit program
         if cv2.waitKey(1) == 27:

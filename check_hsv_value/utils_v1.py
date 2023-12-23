@@ -172,8 +172,7 @@ def summary_view(rgb_img, np_depth_img, boundRect, ex_cam_start_time, ex_cam_end
     #ax_yaw.set_xticklabels([])
     ax_yaw.legend(loc='upper right')
     
-    # automatically adjust padding horizontally
-    # as well as vertically.
+    # automatically adjust padding horizontally as well as vertically.
     plt.tight_layout()
                 
     # Redraw the canvas

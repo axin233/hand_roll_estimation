@@ -113,7 +113,6 @@ def adjust_bbox(bag_video_dir, list_error_frames, input_dir, output_dir):
             # OpenCV requires images in bgr format
             np_bgr_img=cv2.cvtColor(np_rgb_img, cv2.COLOR_RGB2BGR)
             
-            # Write the frame number on image
             # Write rgb_frame_num_from_bag on the image
             cv2.rectangle(np_bgr_img, (702, 460),(848, 480),(255,255,255),-1)
             cv2.putText(np_bgr_img, str(rgb_frame_num_from_bag), (702, 475), 1, 1, (0,0,0), 2, cv2.LINE_AA)
@@ -161,12 +160,6 @@ def adjust_bbox(bag_video_dir, list_error_frames, input_dir, output_dir):
                 if list_error_frames[cur_frame_idx+1] - list_error_frames[cur_frame_idx]>10:
                     next_traget_frame=list_error_frames[cur_frame_idx+1]
                     print('The next frame is far away from the current frame. Please wait...')
-            
-# =============================================================================
-#             # test
-#             print('Frame: {}: top left: ({}, {}), bottom right: ({}, {})'.\
-#                   format(rgb_frame_num_from_bag, g_top_x, g_top_y, g_bottom_x, g_bottom_y))
-# =============================================================================
         
         # Break the loop if user quits the program
         if bool_quit_program==True:
