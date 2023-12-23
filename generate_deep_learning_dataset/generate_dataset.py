@@ -46,7 +46,6 @@ def convert_bag_video(log_txt, path_for_bag_file, path_for_avi_output, path_for_
     np_time_for_plot, np_roll, np_pitch, np_yaw, gyro_x, gyro_y, gyro_z = \
         read_eluer_and_gyro(df_IMU, location, start_idx, end_idx)
     df_bbox_single_area=read_bbox_single_area(df_bbox, area_num)
-    #IMU_data_idx=[i for i in range(0,np_roll.shape[0])]
     
     # Copy the data
     np_roll_for_plot=np.copy(np_roll)
@@ -249,7 +248,6 @@ def convert_bag_video(log_txt, path_for_bag_file, path_for_avi_output, path_for_
            np_time_for_plot, np_roll, np_pitch, np_yaw, gyro_x, gyro_y, gyro_z = \
                read_eluer_and_gyro(df_IMU, location, start_idx, end_idx) 
            df_bbox_single_area=read_bbox_single_area(df_bbox, area_num)
-           #IMU_data_idx=[i for i in range(0,np_roll.shape[0])]
            
            # Copy the data
            np_roll_for_plot=np.copy(np_roll)
@@ -307,15 +305,13 @@ if __name__=='__main__':
     
     for i in range(len(df)):
         
-# =============================================================================
-#         # Ignore the problematic videos
-#         if type(df.iloc[i,4])!=str:
-#             log_txt.write('------------\n')
-#             log_txt.write('Skip {}\n'.format(df.iloc[i,0]))
-#             log_txt.write('------------\n')
-#             log_txt.flush()
-#             continue
-# =============================================================================
+        # Ignore the problematic videos
+        if type(df.iloc[i,4])!=str:
+            log_txt.write('------------\n')
+            log_txt.write('Skip {}\n'.format(df.iloc[i,0]))
+            log_txt.write('------------\n')
+            log_txt.flush()
+            continue
         
         # Note: sur.csv and depth.csv have different structures. subject_id is at col 1 in sur.csv, 
         # while is at col 0 in depth.csv
@@ -380,13 +376,6 @@ if __name__=='__main__':
         log_txt.write('Finish {}\n'.format(subject_name))
         log_txt.write('------------\n')
         log_txt.flush()
-        
-# =============================================================================
-#         # test
-#         if i==1:
-#             print('Finish 2 videos.')
-#             break
-# =============================================================================
     
     #
     now=datetime.datetime.now()

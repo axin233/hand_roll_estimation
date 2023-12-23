@@ -66,17 +66,6 @@ def time_for_last_frame(np_timeStamp,target_timeStamp, extra_time=0):
     return timeStamp
 
 
-# =============================================================================
-# # Deprecated: This function causes defective results.
-# # https://numpy.org/doc/stable/reference/generated/numpy.searchsorted.html 
-# def find_nearest_idx(np_timeStamp, target_timeStamp):
-#     # Binary search
-#     target_idx=np.searchsorted(np_timeStamp, target_timeStamp)
-#     
-#     return target_idx
-# =============================================================================
-
-
 def find_nearest_idx_v1(np_timeStamp, target_timeStamp):
     # The absolute difference
     np_diff=np.abs(np_timeStamp-target_timeStamp)
@@ -186,8 +175,7 @@ def summary_view(rgb_img, np_depth_img, boundRect, ex_cam_start_time, ex_cam_end
     #ax_yaw.set_xticklabels([])
     ax_yaw.legend(loc='upper right')
     
-    # automatically adjust padding horizontally
-    # as well as vertically.
+    # automatically adjust padding horizontally as well as vertically.
     plt.tight_layout()
                 
     # Redraw the canvas

@@ -245,61 +245,6 @@ def generate_data_set(np_depth_img_1, np_rgb_img, depth_scale, output_dataset_di
     
     # Convert rgb image to bgr image
     np_bgr_img=cv2.cvtColor(np_rgb_img, cv2.COLOR_RGB2BGR)
-    
-# =============================================================================
-#     # (Deprecated)(Data set 0) Remove the background by distance
-#     # (Note: Dataset 11 preserves the image background)
-#     #rm_bg_img_bgr_full_size=remove_background_by_distance(np_depth_img_1, depth_scale, np_bgr_img)
-# =============================================================================
-        
-# =============================================================================
-#     # (Data set 0) Save the results
-#     # (Note: Dataset 11 preserves the image background)
-#     d0_path=output_dataset_dir+'d0/'+img_name
-#     d0_is_saved=cv2.imwrite(d0_path,np_bgr_img,[cv2.IMWRITE_PNG_COMPRESSION, 0])
-#     if d0_is_saved == False:
-#         print('Error! Cannot save images for data set 0.')
-#     
-#     # Obtain the mask for glove 
-#     np_hsv_img=cv2.cvtColor(np_rgb_img, cv2.COLOR_RGB2HSV)
-#     lower_bound=hsv_min_tuple
-#     upper_bound=hsv_max_tuple
-#     glove_mask_temp=cv2.inRange(np_hsv_img,lower_bound,upper_bound)
-#     
-# # =============================================================================
-# #     # test (For Subject_13860513672029808805-3-21-22-16-52-sur-sh)
-# #     if rgb_frame_num_from_bag>=2619 and rgb_frame_num_from_bag<=2630:
-# #         up_mask=np.ones((100, 848)).astype('uint8')
-# #         down_mask=np.zeros((380, 848)).astype('uint8')
-# #         mask=np.concatenate((up_mask*255, down_mask), axis=0)
-# #         glove_mask_temp=cv2.subtract(glove_mask_temp, mask)
-# #         cv2.imshow('glove_mask_temp', glove_mask_temp)
-# # =============================================================================
-#     
-#     # Detect the bounding rectangle
-#     #glove_mask_filled, boundRect = glove_detection(glove_mask_temp)# (Deprecated)
-#     glove_mask, boundRect = remove_noise_via_connectedComponent\
-#         (np_bgr_img, glove_mask_temp, '', visualize_idividual_cc=False)
-#     
-#     # (Data set 0) Record info
-#     # Convert the bounding box representation from *top-left corner + width and height* to 
-#     # *top-left corner + bottom-right corner*
-# 	# Note: boundRect[3] refers to rows (i.e., height), 
-# 	# while boundRect[2] refers to columns (i.e., width)
-#     endpoint_1_x=int(boundRect[0])
-#     endpoint_1_y=int(boundRect[1])
-#     endpoint_2_x=int(boundRect[0]+boundRect[2])
-#     endpoint_2_y=int(boundRect[1]+boundRect[3])
-#     output_dataset_dir_split=output_dataset_dir.split('/')
-#     subject_name=output_dataset_dir_split[-2]
-#     d0_path_for_csv=subject_name+'/d0/'+img_name
-#     if boundRect[2]<=50 or boundRect[3]<=50:
-#         d0_has_BB=0
-#     else:
-#         d0_has_BB=1
-#     bounding_box_csv.write('{},{},{},{},{},{},{},{}\n'.format(area_num, rgb_frame_num_from_bag, d0_has_BB, \
-#                     endpoint_1_x, endpoint_1_y, endpoint_2_x, endpoint_2_y, d0_path_for_csv))
-# =============================================================================
 
     # Record the bbox info
     boundRect=(top_x, top_y, bottom_x-top_x, bottom_y-top_y)
@@ -316,13 +261,7 @@ def generate_data_set(np_depth_img_1, np_rgb_img, depth_scale, output_dataset_di
         # (Data set 1) Crop the glove in rgb image using color and depth info
         # *Note: This function will modify boundRect*
         d1_bgr_img, boundRect=crop_color_img_br(np_bgr_img, boundRect)
-        
-# =============================================================================
-#         # test
-#         print('bbox coordinate: (TL_x, TL_y, W, H): ({}, {}, {}, {})'.\
-#               format(boundRect[0], boundRect[1], boundRect[2], boundRect[3]))
-# =============================================================================
-            
+                  
         # Avoid Saving cropped images that have improper bounding box
         if boundRect[0]>=0 and boundRect[1]>=0 and boundRect[2]<IMG_WIDTH and boundRect[3]<IMG_HEIGHT:
         
@@ -347,71 +286,6 @@ def generate_data_set(np_depth_img_1, np_rgb_img, depth_scale, output_dataset_di
             log_txt.write('Skip the frame...\n')
             log_txt.flush()
             boundRect[0], boundRect[1], boundRect[2], boundRect[3] = 0, 0, 0, 0 # Reset parameters
-        
-# =============================================================================
-#         # We found that few people use depth images to estimate orientation, 
-#         # so we not longer generate dataset 2 and dataset 3 after Feb 8, 2023
-#         # (Data set 2) Crop the glove in depth image using bounding rectangle
-#         d2_depth_img_uint16=crop_depth_img_br(np_depth_img_1, boundRect)
-#         d2_depth_img_uint16_cp=np.copy(d2_depth_img_uint16)
-#         
-#         # (Data set 3) Save the images
-#         d3_depth_img_uint16=np.copy(d2_depth_img_uint16)
-#         d3_path=output_dataset_dir+'d3/'+img_name
-#         d3_is_saved=cv2.imwrite(d3_path,d3_depth_img_uint16,[cv2.IMWRITE_PNG_COMPRESSION, 0])
-#         if d3_is_saved == False:
-#             print('Error! Cannot save images for data set 3.')
-#             
-#         # (Data set 3) Save the results to csv file
-#         d3_path_for_csv=subject_name+'/d3/'+img_name
-#         d3_csv.write('{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(area_num, rgb_frame_num_from_bag, \
-#                     current_roll_value, current_pitch_value, current_yaw_value, sin_value, cos_value, \
-#                     instant_gyro_x, instant_gyro_y, instant_gyro_z, avg_gyro_x, avg_gyro_y, avg_gyro_z,\
-#                     d3_path_for_csv))
-#         
-#         # (Data set 2) Convert the datatype from uint16 to uint8
-#         cropped_depth_img_f=d2_depth_img_uint16_cp.astype(float)
-#         pixel_range=np.max(cropped_depth_img_f) - np.min(cropped_depth_img_f)
-#         pixel_range=1e-9 if pixel_range==0 else pixel_range # Prevent the denominator being 0
-#         depth_img_normalized=(cropped_depth_img_f-np.min(cropped_depth_img_f))*255/pixel_range
-#         depth_img_uint8=depth_img_normalized.astype(np.uint8)
-#         
-#         # (Data set 2) Obtain the threshold value via the modified Otsu method
-#         otsu_threshold=modified_Otsu_threshold(depth_img_uint8)
-#         
-#         # (Data set 2) Threshold the image
-#         actual_th, thre_img=cv2.threshold(depth_img_uint8,otsu_threshold,255,cv2.THRESH_BINARY)
-#         
-#         # (Data set 2) Convert the datatype from uint8 to uint16
-#         thre_img_f=thre_img.astype(float)
-#         pixel_range_1=np.max(thre_img_f) - np.min(thre_img_f)
-#         pixel_range_1=1e-9 if pixel_range_1==0 else pixel_range_1
-#         thre_img_normalized=(thre_img-np.min(thre_img_f))*65535/pixel_range_1
-#         thre_img_uint16=thre_img_normalized.astype(np.uint16)
-#         
-#         # (Data set 2) Remove the background
-#         d2_depth_img_final=cv2.subtract(d2_depth_img_uint16, thre_img_uint16)
-#         
-#         if visualize_result==True:
-#             d2_img=visualize_depth_image(d2_depth_img_final)
-#             cv2.namedWindow('RGB cropped image', cv2.WINDOW_AUTOSIZE)
-#             cv2.namedWindow('Depth cropped image', cv2.WINDOW_AUTOSIZE)
-#             cv2.imshow('RGB cropped image',d1_bgr_img)
-#             cv2.imshow('Depth cropped image',d2_img) #Note: waitKey() is at the other function
-#             
-#         # (Data set 2) Save the images
-#         d2_path=output_dataset_dir+'d2/'+img_name            
-#         d2_is_saved=cv2.imwrite(d2_path,d2_depth_img_final,[cv2.IMWRITE_PNG_COMPRESSION, 0])
-#         if d2_is_saved == False:
-#             print('Error! Cannot save images for data set 2.')
-#             
-#         # (Data set 2) Save the results to csv file
-#         d2_path_for_csv=subject_name+'/d2/'+img_name
-#         d2_csv.write('{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(area_num, rgb_frame_num_from_bag, \
-#                     current_roll_value, current_pitch_value, current_yaw_value, sin_value, cos_value, \
-#                     instant_gyro_x, instant_gyro_y, instant_gyro_z, avg_gyro_x, avg_gyro_y, avg_gyro_z,\
-#                     d2_path_for_csv))
-# =============================================================================
     
     return boundRect, current_roll_value, current_pitch_value, current_yaw_value,\
         sin_value, cos_value, np_bgr_img
