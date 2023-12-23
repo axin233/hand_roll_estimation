@@ -46,12 +46,12 @@ To examine the algorithms' robustness, videos collected at 4 locations are used.
 
 This table summarizes the roll angle estimation error (unit: degrees) for the 3 algorithms at the 4 locations.
 
-|          | Number of sutures | CNN | MO | MM |
+|          | Number of video frames | CNN | MO | MM |
 | :------: | :------: | :------: | :------: | :------: |
-| Location A | 332 | 10.25 | 9.6 | 8.77 |
-| Location B | 1007 | 9.52 | 9.45 | 9.08 |
-| Location C | 937 | 7.27 | 7.47 | 7.37 |
-| Location D | 261 | 8.39 | 8.46 | 9.03 |
+| Location A | 75k | 10.25 | 9.6 | 8.77 |
+| Location B | 235k | 9.52 | 9.45 | 9.08 |
+| Location C | 200k | 7.27 | 7.47 | 7.37 |
+| Location D | 57k | 8.39 | 8.46 | 9.03 |
 
 > Note that the number of sutures consists of sutures at surface condition (see Fig. 1(d)) and sutures at depth condition (see Fig. 1(e)).
 
